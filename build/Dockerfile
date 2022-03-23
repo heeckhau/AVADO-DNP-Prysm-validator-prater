@@ -1,6 +1,6 @@
 
 # build image for monitor & wizard
-FROM node:12-alpine as builder-nodejs
+FROM node:16.14.0 as builder-nodejs
 
 # build wizard
 WORKDIR /usr/src/wizard
@@ -9,7 +9,7 @@ RUN rm -Rf   node_modules
 RUN rm -f yarn.lock
 RUN yarn add react-scripts 
 RUN yarn 
-RUN yarn build
+RUN yarn run build
 
 
 #TODO: DO NOT MERGE TO MASTER: use release $VERSION here instead
