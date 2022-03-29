@@ -1,6 +1,7 @@
 import React from 'react';
 import "./css/style.sass";
 import axios from "axios";
+import Validators from './Validators';
 
 
 function App() {
@@ -57,7 +58,10 @@ function App() {
                 </div>
 
             </section>
+
+            <Validators network="prater" apiToken="${authToken}" />
         </div>
+
     );
 }
 
