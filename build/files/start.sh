@@ -31,7 +31,7 @@ COMMAND="/bin/validator \
   --web \
   --grpc-gateway-host=0.0.0.0 \
   --grpc-gateway-port=80 \
-  --grpc-gateway-corsdomain=\"*\" \
+  --grpc-gateway-corsdomain=* \
   --accept-terms-of-use \
   ${EXTRA_OPTS}"
 

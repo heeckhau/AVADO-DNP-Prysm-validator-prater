@@ -27,7 +27,10 @@ const Validators = ({ network, apiToken }) => {
                 if (res.status === 200) {
                     setValidators(res.data.data.map(d => d.validating_pubkey))
                 }
-            });
+            }).catch((e) => {
+                console.log(e)
+                console.dir(e)
+            });;
 
         }
     }
@@ -37,7 +40,7 @@ const Validators = ({ network, apiToken }) => {
             updateValidators();
     }, [apiToken]) // eslint-disable-line
 
-   
+
 
     function askConfirmationRemoveValidator(pubKey) {
         confirmAlert({
@@ -87,30 +90,36 @@ const Validators = ({ network, apiToken }) => {
     }
 
     return (
-        <div>
+        <>
             {validators && (
                 <>
-                    <table className="table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Public key</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {validators.map(validator =>
-                                <tr key={validator}>
-                                    <td>{beaconchainUrl("/validator/" + validator, <FontAwesomeIcon className="icon" icon={faSatelliteDish} />)}</td>
-                                    <th>{beaconchainUrl("/validator/" + validator, validator)}</th>
-                                    <td><button className="button is-text has-text-grey-light" onClick={() => askConfirmationRemoveValidator(validator)}><FontAwesomeIcon className="icon" icon={faTrash} /></button></td>
-                                </tr>
-                            )}
-                        </tbody>
-                    </table>
+                    <div className="card">
+                        <div class="card-content">
+                            <h2 className="subtitle is-4">Validators</h2>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Public key</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {validators.map(validator =>
+                                        <tr key={validator}>
+                                            <td>{beaconchainUrl("/validator/" + validator, <FontAwesomeIcon className="icon" icon={faSatelliteDish} />)}</td>
+                                            <th>{beaconchainUrl("/validator/" + validator, <abbr title={validator}>{validator.substring(0, 10) + "…"}</abbr>)}</th>
+                                            <td><button className="button is-text has-text-grey-light" onClick={() => askConfirmationRemoveValidator(validator)}><FontAwesomeIcon className="icon" icon={faTrash} /></button></td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </>
-            )}
-        </div>
+            )
+            }
+        </>
     );
 };
 

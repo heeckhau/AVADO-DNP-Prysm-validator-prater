@@ -53,13 +53,14 @@ function App() {
 
                                 </p>
                             </div>
+                            <Validators network="prater" apiToken={authToken} />
                         </div>
                     </div>
                 </div>
-
             </section>
 
-            <Validators network="prater" apiToken="${authToken}" />
+
+
         </div>
 
     );
