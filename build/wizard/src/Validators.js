@@ -24,8 +24,9 @@ const Validators = ({ network, apiToken }) => {
                     Authorization: `Bearer ${apiToken}`
                 }
             }).then((res) => {
+                console.log("result:", res)
                 if (res.status === 200) {
-                    setValidators(res.data.data.map(d => d.validating_pubkey))
+                    setValidators(res.data.keystores.map(d => d.validating_pubkey))
                 }
             }).catch((e) => {
                 console.log(e)

@@ -1,3 +1,4 @@
+ARG VERSION
 
 # build image for monitor & wizard
 FROM node:16.14.0 as builder-nodejs
@@ -11,9 +12,7 @@ RUN yarn add react-scripts
 RUN yarn 
 RUN yarn run build
 
-
-#TODO: DO NOT MERGE TO MASTER: use release $VERSION here instead
-FROM  gcr.io/prysmaticlabs/prysm/validator:latest as builder
+FROM  gcr.io/prysmaticlabs/prysm/validator:${VERSION} as builder
 
 FROM debian:buster-slim
 
