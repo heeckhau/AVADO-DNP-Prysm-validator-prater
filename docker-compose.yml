@@ -1,11 +1,11 @@
 version: '3.4'
 services:
   eth2validator-prater.avado.dnp.dappnode.eth:
-    image: 'eth2validator-prater.avado.dnp.dappnode.eth:0.0.8'
+    image: 'eth2validator-prater.avado.dnp.dappnode.eth:0.0.9'
     build:
       context: ./build
       args:
-        VERSION: v2.0.6
+        VERSION: v2.1.0
     environment:
       - >-
         EXTRA_OPTS=--graffiti="AVADO"
