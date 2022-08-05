@@ -13,9 +13,8 @@ services:
         --beacon-rpc-gateway-provider=my.prysm-beacon-chain-prater.avado.dnp.dappnode.eth:3500
     volumes:
       - 'data:/root'
-    ports:
-      - '13000:13000'
+    ports:      
       - '7500:7500'
-      - '80:80'
+      - '81:81'
 volumes:
   data: {}

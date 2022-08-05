@@ -48,7 +48,7 @@ function App() {
 
                                 <p className="has-text-centered">
                                     <a className="button is-medium is-link" target="_blank"
-                                        href={`http://eth2validator-prater.my.ava.do/initialize?token=${authToken}`}>I agree - Open the Prysm web
+                                        href={`http://eth2validator-prater.my.ava.do:7500/initialize?token=${authToken}`}>I agree - Open the Prysm web
                                         dashboard</a>
 
                                 </p>
