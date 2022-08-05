@@ -14,8 +14,7 @@ RUN yarn run build
 
 FROM  gcr.io/prysmaticlabs/prysm/validator:${VERSION} as builder
 
-FROM debian:buster-slim
-
+FROM --platform=linux/amd64 debian:buster-slim
 
 RUN apt update && \
     apt install -y ca-certificates nginx && \
