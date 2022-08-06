@@ -12,7 +12,7 @@ RUN yarn add react-scripts
 RUN yarn 
 RUN yarn run build
 
-FROM  gcr.io/prysmaticlabs/prysm/validator:${VERSION} as builder
+FROM --platform=linux/amd64 gcr.io/prysmaticlabs/prysm/validator:${VERSION} as builder
 
 FROM --platform=linux/amd64 debian:buster-slim
 
