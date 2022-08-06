@@ -17,8 +17,11 @@ FROM  gcr.io/prysmaticlabs/prysm/validator:${VERSION} as builder
 FROM --platform=linux/amd64 debian:buster-slim
 
 RUN apt update && \
-    apt install -y ca-certificates nginx && \
-    rm -rf /var/lib/apt/lists/*
+    apt install -y \
+    ca-certificates \
+    jq \
+    nginx \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR  /usr/share/nginx
 COPY --from=builder-nodejs /usr/src/wizard/build /usr/share/nginx/wizard

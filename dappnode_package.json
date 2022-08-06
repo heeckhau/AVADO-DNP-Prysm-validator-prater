@@ -12,7 +12,7 @@
       "data:/root"
     ],
     "environment": [
-      "EXTRA_OPTS=--graffiti=AVADO --beacon-rpc-provider=prysm-beacon-chain-prater.my.ava.do:4000 --beacon-rpc-gateway-provider=prysm-beacon-chain-prater.my.ava.do:3500"
+      "EXTRA_OPTS="
     ],
     "restart": "always"
   },

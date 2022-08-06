@@ -7,13 +7,10 @@ services:
       args:
         VERSION: v2.1.4-rc.1
     environment:
-      - >-
-        EXTRA_OPTS=--graffiti="AVADO"
-        --beacon-rpc-provider=my.prysm-beacon-chain-prater.avado.dnp.dappnode.eth:4000
-        --beacon-rpc-gateway-provider=my.prysm-beacon-chain-prater.avado.dnp.dappnode.eth:3500
+      - EXTRA_OPTS=
     volumes:
       - 'data:/root'
-    ports:      
+    ports:
       - '7500:7500'
       - '81:81'
 volumes:
