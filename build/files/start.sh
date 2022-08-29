@@ -20,6 +20,12 @@ rm -f /usr/share/nginx/wizard/auth-token.txt
 cat /root/.eth2validators/auth-token | tail -1 > /usr/share/nginx/wizard/auth-token.txt
 chmod 644 /usr/share/nginx/wizard/auth-token.txt
 
+# Workaround for fee recipient in RocketPool/Prysm
+PROPOSER_SETTINGS_PATH="/root/.eth2validators/proposer_settings.json"
+if [ -f "${PROPOSER_SETTINGS_PATH}" ]; then
+  PROPOSER_SETTINGS_FILE="${PROPOSER_SETTINGS_PATH}"
+fi
+
 echo "Starting validator"
 
 set -u
@@ -41,8 +47,6 @@ echo "Extra opts: \"${EXTRA_OPTS}\""
   --grpc-gateway-host="0.0.0.0" \
   --monitoring-host="0.0.0.0" \
   --wallet-dir="/root/.eth2validators" \
-  --wallet-password-file="/root/.eth2wallets/wallet-password.txt" \
-  --write-wallet-password-on-web-onboarding \
   --web \
   --rpc \
   --grpc-gateway-host="0.0.0.0" \
@@ -50,7 +54,8 @@ echo "Extra opts: \"${EXTRA_OPTS}\""
   --grpc-gateway-corsdomain="*" \
   --accept-terms-of-use \
   --graffiti="${GRAFFITI}" \
-  --beacon-rpc-provider=my.prysm-beacon-chain-prater.avado.dnp.dappnode.eth:4000 \
-  --beacon-rpc-gateway-provider=my.prysm-beacon-chain-prater.avado.dnp.dappnode.eth:3500 \
+  ${PROPOSER_SETTINGS_FILE:+--proposer-settings-file=${PROPOSER_SETTINGS_FILE}} \
+  --beacon-rpc-provider=prysm-beacon-chain-prater.my.ava.do:4000 \
+  --beacon-rpc-gateway-provider=prysm-beacon-chain-prater.my.ava.do:3500 \
   ${VALIDATORS_PROPOSER_DEFAULT_FEE_RECIPIENT:+--suggested-fee-recipient=${VALIDATORS_PROPOSER_DEFAULT_FEE_RECIPIENT}} \
   ${EXTRA_OPTS}

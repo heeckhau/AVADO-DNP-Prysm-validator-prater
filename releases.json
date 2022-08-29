@@ -68,5 +68,19 @@
     "uploadedTo": {
       "dappnode": "Fri, 05 Aug 2022 10:10:53 GMT"
     }
+  },
+  "0.0.11": {
+    "hash": "/ipfs/QmZqzsfXPvZk6fH268zMLdTypCXrw6xAaA63MFshQNJyVQ",
+    "type": "manifest",
+    "uploadedTo": {
+      "dappnode": "Tue, 23 Aug 2022 06:56:58 GMT"
+    }
+  },
+  "0.0.12": {
+    "hash": "/ipfs/QmW88vE2PVSuNPWrJQW86pJAqETYkXKJ8LYq54rciW9tb5",
+    "type": "manifest",
+    "uploadedTo": {
+      "dappnode": "Mon, 29 Aug 2022 12:22:36 GMT"
+    }
   }
 }
