@@ -20,9 +20,19 @@ rm -f /usr/share/nginx/wizard/auth-token.txt
 cat /root/.eth2validators/auth-token | tail -1 > /usr/share/nginx/wizard/auth-token.txt
 chmod 644 /usr/share/nginx/wizard/auth-token.txt
 
+SETTINGSFILE=/root/settings.json
+
 # Workaround for fee recipient in RocketPool/Prysm
 PROPOSER_SETTINGS_PATH="/root/.eth2validators/proposer_settings.json"
 if [ -f "${PROPOSER_SETTINGS_PATH}" ]; then
+  # check that default has not changed
+  DEFAULT_FEE_ADDRESS=$(cat ${SETTINGSFILE} | jq -r '."validators_proposer_default_fee_recipient"')
+  PROPOSER_DEFAULT=$(cat ${PROPOSER_SETTINGS_PATH} | jq -r '.default_config.fee_recipient')
+  # Update default if necesary
+  if [ "${DEFAULT_FEE_ADDRESS,,}" != "${PROPOSER_DEFAULT,,}" ]; then #compare case insensitive
+    cat ${PROPOSER_SETTINGS_PATH} | jq '(.default_config.fee_recipient) |= "0xd4e96ef8eee8678dbff4d535e033ed1a4f7605b7"' > ${PROPOSER_SETTINGS_PATH}.tmp
+    mv ${PROPOSER_SETTINGS_PATH}.tmp ${PROPOSER_SETTINGS_PATH}
+  fi
   PROPOSER_SETTINGS_FILE="${PROPOSER_SETTINGS_PATH}"
 fi
 
@@ -31,7 +41,6 @@ echo "Starting validator"
 set -u
 set -o errexit
 
-SETTINGSFILE=/root/settings.json
 GRAFFITI=$(cat ${SETTINGSFILE} | jq '."validators_graffiti" // empty' | tr -d '"')
 VALIDATORS_PROPOSER_DEFAULT_FEE_RECIPIENT=$(cat ${SETTINGSFILE} | jq '."validators_proposer_default_fee_recipient" // empty' | tr -d '"')
 
